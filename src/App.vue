@@ -5,6 +5,7 @@
       color="primary"
       dark
     >
+      <router-link to="/">
       <div class="d-flex align-center">
         <v-img
           alt="Logo"
@@ -14,8 +15,9 @@
           transition="scale-transition"
           width="80"
         />
-        RECIPES
+        <span id="title">RECIPES</span>
       </div>
+      </router-link>
 
       <v-spacer></v-spacer>
 
@@ -35,3 +37,9 @@ export default {
   name: 'App',
 };
 </script>
+
+<style>
+#title {
+  color:white
+}
+</style>
