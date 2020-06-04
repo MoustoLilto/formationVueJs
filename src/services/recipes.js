@@ -1,11 +1,11 @@
 let recipes = [
     {
         id: 0,
-        name: 'Route',
-        picture: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-        description: 'CECI est un test',
-        ingredients: ['lolo', 'sisi', 'maria'],
-        instructions: 'Faut prendre lolo, tu jettes sur sisi et tu frappes avec maria',
+        name: 'Carbo',
+        picture: 'https://assets.afcdn.com/recipe/20180716/81306_w1024h768c1cx1944cy2592cxt0cyt0cxb3888cyb5184.jpg',
+        description: 'Des pates a la creme fraiche',
+        ingredients: ['pates', 'creme', 'lardons'],
+        instructions: 'Mettre les pattes dans de l eau puis verser creme et enfin ajouter lardons',
         flex: 6
     },
     {
@@ -60,26 +60,34 @@ function get() {
     console.log('Recipes: ', recipes);
     return recipes;
 }
+function getById(id) {
+    console.log('Get recipeById... with id: ', id);
+    const recipe = recipes.find(recipe => recipe.id == id);
+    console.log('Recipe: ', recipe);
+    return recipe;
+}
 function add(recipe) {
-    console.log('Add recipe...');
+    console.log('Add recipe... with recipe: ', recipe);
     recipe.id = recipes.length;
     recipes.push(recipe);
     console.log('Recipes: ', recipes);
 }
 function remove(id) {
-    console.log('Delete recipe...');
+    console.log('Delete recipe... with id: ', id);
     const newRecipes = recipes.slice();
     recipes = newRecipes.filter((recipe) => {
-        return recipe.id !== id
+        return recipe.id != id
     });
     console.log('Recipes: ', recipes);
 }
 function modify(newRecipe) {
-    console.log('Modify recipe...');
+    console.log('Modify recipe... with recipe: ', newRecipe);
     const newRecipes = recipes.slice();
     recipes = newRecipes.map((recipe) => {
-        if (recipe.id !== newRecipe.id) {
+        if (recipe.id == newRecipe.id) {
             return newRecipe
+        } else {
+            return recipe;
         }
     });
     console.log('Recipes: ', recipes);
@@ -87,6 +95,7 @@ function modify(newRecipe) {
 
 export default {
     get,
+    getById,
     add,
     modify,
     remove,

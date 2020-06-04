@@ -7,31 +7,31 @@
           v-model="valid"
         >
           <v-text-field
-            v-model="name"
+            v-model="recipe.name"
             :counter="10"
             :rules="nameRules"
             label="*Name"
             required
           />
           <v-text-field
-            v-model="picture"
+            v-model="recipe.picture"
             label="*Picture url"
             required
           />
           <v-text-field
-            v-model="description"
+            v-model="recipe.description"
             :counter="100"
             :rules="textRules"
             label="Description"
           />
           <v-text-field
-            v-model="instructions"
+            v-model="recipe.instructions"
             :counter="100"
             :rules="textRules"
             label="Instructions"
           />
           <v-text-field
-            v-model="flex"
+            v-model="recipe.flex"
             label="*Display flex"
             :rules="flexRules"
             required
@@ -73,12 +73,7 @@ import serviceRecipes from '@/services/recipes.js';
     name: 'addRecipe',
     data() {
         return {
-            name: 'AVion',
-            picture: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-            description: 'CECI est un test',
-            ingredients: ['lolo', 'sisi', 'maria'],
-            instructions: 'Faut prendre lolo, tu jettes sur sisi et tu frappes avec maria',
-            flex: 4,
+            recipe: {},
             valid: true,
             textRules: [
                 v => (v && v.length <= 100) || 'text must be less than 100 characters',
@@ -93,18 +88,13 @@ import serviceRecipes from '@/services/recipes.js';
             ],
         };
     },
-
+    mounted() {
+        this.recipe = serviceRecipes.getById(this.$route.params.id);
+    },
     methods: {
       validate () {
         if (this.$refs.form.validate()) {
-          serviceRecipes.add({
-            name: this.name,
-            picture: this.picture,
-            description: this.description,
-            ingredients: this.ingredients,
-            instructions: this.instructions,
-            flex: this.flex,
-          });
+          serviceRecipes.modify(this.recipe);
           this.$router.push('/');
         }
       },

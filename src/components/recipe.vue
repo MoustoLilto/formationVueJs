@@ -47,6 +47,9 @@
         Collapse
       </v-btn>
       <v-spacer/>
+      <v-btn class="mx-2" fab dark small color="warning" @click="modifyRecipe(id)">
+        <v-icon dark>mdi-pencil</v-icon>
+      </v-btn>
       <v-btn class="mx-2" fab dark small color="secondary" @click="deleteRecipe(id)">
         <v-icon dark>mdi-minus</v-icon>
       </v-btn>
@@ -96,6 +99,9 @@ export default {
         deleteRecipe(id) {
           this.$emit('deletedRecipe', id);
         },
+        modifyRecipe(id) {
+          this.$router.push(`/modify/${id}`);
+        }
     },
 }
 </script>

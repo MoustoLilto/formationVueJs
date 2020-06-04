@@ -14,7 +14,17 @@ Vue.use(VueRouter)
     path: '/add',
     name: 'AddRecipe',
     component: () => import('../views/AddRecipe.vue')
-  }
+  },
+  {
+    path: '/modify/:id',
+    name: 'modifyRecipe',
+    component: () => import('../views/ModifyRecipe.vue')
+  },
+  {
+    path: '*',
+    name: 'Default',
+    component: recipes
+  },
 ]
 
 const router = new VueRouter({
